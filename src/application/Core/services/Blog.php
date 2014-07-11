@@ -40,6 +40,7 @@ class Core_Service_Blog
 	}
 	public function  saveArticle(Core_Model_Article $article){
 		$mapper = new Core_Model_Mapper_Article;
-		$mapper->save($article);
+		$mapper->save($article); 
+		//qiojgqllqghsjlkhj 
 	}
 }
