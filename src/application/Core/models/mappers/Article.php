@@ -3,6 +3,12 @@
 class Core_Model_Mapper_Article 
 {
 	private $dbTable;
+	
+		
+	const COL_ID = 'article_id';
+	const COL_TITLE = 'article_title';
+	const COL_CONTENT = 'article_content';
+	const COL_CATEGORIE_ID = 'categorie_id';
 
 	public function __construct()
 	{
@@ -40,11 +46,11 @@ class Core_Model_Mapper_Article
 		$row = $this->objectToRow($article);
 		if ($origin instanceof Zend_Db_Table_Row_Abstract) {
 			// Update
-			$where = array('article_id = ?' => $article->getId());
+			$where = array(self::COL_ID . '= ?' => $article->getId());
 			$this->dbTable->update($row, $where);
 		} else {
 			// Insert
-			unset($row['article_id']);
+			unset($row[self::COL_ID]);
 			$this->dbTable->insert($row);
 		}
 	}
@@ -52,32 +58,32 @@ class Core_Model_Mapper_Article
 	public function rowToObject(Zend_Db_Table_Row $row)
 	{
 		$article = new Core_Model_Article;
-		$article->setId($row['article_id'])
-				->setTitle($row['article_title'])
-				->setContent($row['article_content']);
+		$article->setId($row[self::COL_ID])
+				->setTitle($row[self::COL_TITLE])
+				->setContent($row[self::COL_CONTENT]);
 
 		$rowCategorie = $row->findParentRow('Core_Model_DbTable_Categorie');
-		$rowAuteur = $row->findParentRow('Core_Model_DbTable_Auteur');
+		
 		
 		$mapperCategorie = new Core_Model_Mapper_Categorie();
 		$categorie = $mapperCategorie->rowToObject($rowCategorie);
 		
-		$mapperAuteur = new Core_Model_Mapper_Auteur();
-		$auteur = $mapperAuteur->rowToObject($rowAuteur);
+		
+	
 
 		$categorie->addArticle($article);
 		$article->setCategorie($categorie);
-		$article->setAuteur($auteur);
+		
 		return $article;
 	}
 	public function objectToRow(Core_Model_Article $article){
 		
 		return array(
-			'article_id' => $article->getId(),
-			'article_title' => $article->getTitle(),
-			'article_content' => $article->getContent(),
-			'categorie_id' => $article->getCategorie()->getId(),
-			'auteur_id'	=> $article->getAuteur()->getId()
+			self::COL_ID => $article->getId(),
+			self::COL_TITLE => $article->getTitle(),
+			self::COL_CONTENT => $article->getContent(),
+			self::COL_CATEGORIE_ID => $article->getCategorie()->getId(),
+			
 		);
 	}
 }
