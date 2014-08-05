@@ -1,6 +1,6 @@
 <?php 
 
-class Core_Model_Article{
+class Core_Model_Article implements Core_Model_Interface{
 	
 	
 	/**
@@ -21,7 +21,7 @@ class Core_Model_Article{
 	
 	private $categorie;
 	
-	private $auteur;
+	private $auteur = null;
 	
 	/**
 	 * @return the $id

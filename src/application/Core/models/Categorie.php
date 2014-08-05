@@ -1,6 +1,6 @@
 <?php 
 
-class Core_Model_Categorie
+class Core_Model_Categorie implements  Core_Model_Interface
 {
 	/**
 	 * @var number
@@ -15,6 +15,11 @@ class Core_Model_Categorie
 	 * @var array
 	 */
 	private $articles = array();
+	
+	/**
+	 * @var parent
+	 */
+	private $parant;
 
 	/**
 	 * @return the $id
@@ -64,6 +69,24 @@ class Core_Model_Categorie
 		$this->articles[] = $article;
 		return $this;
 	}
+	/**
+	 * @return the $parant
+	 */
+	public function getParant() {
+		return $this->parant;
+	}
+
+	/**
+	 * @param parent $parant
+	 */
+	public function setParant(Core_Model_Categorie $parant = null) {
+		$this->parant = $parant;
+		return $this;
+	}
+
+
+
+	
 
 
 

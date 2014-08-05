@@ -13,11 +13,13 @@ require_once VENDOR_PATH . DS . 'autoload.php';
 
 /* Mise en place de la gestion d'erreurs */
 if ('development' === APP_ENV) {
-	\php_error\reportErrors();
+// 	\php_error\reportErrors();
 } else {
 	set_exception_handler(array('\Iplib\Error', 'handleException'));
 	set_error_handler(array('\Iplib\Error', 'handleError'));
 }
+
+set_include_path(get_include_path() . APP_PATH);
 
 $application = new Zend_Application(
 	APP_ENV, 

@@ -3,6 +3,7 @@ class Core_Model_Auteur{
 
 	private $name;
 	private $id;
+	private $email;
 	
 	private $articles = array();
 	/**
@@ -41,6 +42,22 @@ class Core_Model_Auteur{
 		$this->id = $id;
 		return $this;
 	}
+		
+
+	/**
+	 * @return the $email
+	 */
+	public function getEmail() {
+		return $this->email;
+	}
+
+	/**
+	 * @param field_type $email
+	 */
+	public function setEmail($email) {
+		$this->email = $email;
+		return $this;
+	}
 
 	/**
 	 * @param multitype: $articles
@@ -54,6 +71,8 @@ class Core_Model_Auteur{
 		$this->articles[] = $article;
 		return $this;
 	}
+	
+	
 
 	
 	

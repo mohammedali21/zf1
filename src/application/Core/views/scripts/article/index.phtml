@@ -5,4 +5,6 @@
 <?= $article->getTitle()?>
 </a></h2>
 <p><?= $article->getContent()?></p>
+<p><?= $article->getAuteur()->getName()?></p>
+<p><?= $article->getCategorie()->getNom()?></p>
 <?php endforeach;?>

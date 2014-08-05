@@ -2,6 +2,17 @@
 
 class Core_Service_Blog
 {
+	
+	
+	public function fetchCategories(){
+		
+		$mapper = new Core_Model_Mapper_Categorie();
+		return $mapper->fetchAll();
+	}
+	
+	
+	
+	
 	/**
 	 * Fetches last articles (ordered by date)
 	 * @param number $count number of fetched articles
