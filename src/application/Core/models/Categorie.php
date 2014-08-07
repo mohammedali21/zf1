@@ -1,6 +1,6 @@
 <?php 
 
-class Core_Model_Categorie implements  Core_Model_Interface
+class Core_Model_Categorie implements  Core_Model_Interface, Zend_Acl_Resource_Interface
 {
 	/**
 	 * @var number
@@ -83,6 +83,21 @@ class Core_Model_Categorie implements  Core_Model_Interface
 		$this->parant = $parant;
 		return $this;
 	}
+	
+  public function getResourceId() {
+    	switch ($this->nom){
+    		case 'pokemon':
+    			return 'categorie8ans';
+    			break;
+    		case 'sexe':
+    		case 'xxx':
+    			return 'categorie18ans';
+    			break;
+    		default:
+    			return 'categorie';
+    			break;
+    	}
+    }
 
 
 

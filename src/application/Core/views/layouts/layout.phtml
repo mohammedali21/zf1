@@ -69,7 +69,12 @@
 <!--         </nav> -->
 		
 		<nav class="navdrawer-container promote-layer">
-        <?= $this->navigation()->menu()->setUlClass('main-nav')?>
+           
+        <?= $this->navigation()    
+        ->menu()
+        ->setUlClass('main-nav')
+        ->setPartial(array('navigation/menu.phtml', 'Core'))
+        ?>
         </nav>
         <main>
         	Vous etes ici : <?= $this->navigation()

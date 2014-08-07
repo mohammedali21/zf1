@@ -1,8 +1,8 @@
 <?php 
 
-class  Core_Model_Mapper_Auteur{
+class  Core_Model_Mapper_Auteur extends Core_Model_Mapper_MapperAbstract{
 
-	private $dbTable;
+	
 	
 	const COL_ID = 'auteur_id';
 	const COL_NAME = 'auteur_name';

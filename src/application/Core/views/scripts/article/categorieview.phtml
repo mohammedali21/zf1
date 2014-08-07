@@ -1,0 +1,8 @@
+<H1><?= $this->categorie->getNom?></H1>
+
+
+<?php foreach ($this->articles as $article) :?>
+
+<h2><?= $article->getTitle()?></h2>
+<h2><?= $article->getContent()?></h2>
+<?php endforeach;?>

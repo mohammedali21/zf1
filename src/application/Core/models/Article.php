@@ -1,6 +1,7 @@
 <?php 
 
-class Core_Model_Article implements Core_Model_Interface{
+class Core_Model_Article implements Core_Model_Interface, Zend_Acl_Resource_Interface
+{
 	
 	
 	/**
@@ -94,6 +95,10 @@ class Core_Model_Article implements Core_Model_Interface{
 	public function setAuteur(Core_Model_Auteur $auteur) {
 		$this->auteur = $auteur;
 		return $this;
+	}
+	
+	public function getResourceId(){
+		return 'article';
 	}
 
 	

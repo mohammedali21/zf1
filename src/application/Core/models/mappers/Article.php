@@ -82,4 +82,37 @@ class Core_Model_Mapper_Article extends  Core_Model_Mapper_MapperAbstract
 		
 		return $data;
 	}
+	
+	public function arrayToObject(array $data){
+		
+		$article = new Core_Model_Article;
+		
+		if(array_key_exists('id', $data)){
+			$article->setId($data['id']);
+		}
+		
+		$article->setTitle($data['title']);
+		$article->setContent($data['content']);	
+		
+		$mapperAuteur = new Core_Model_Mapper_Auteur();
+		
+		if($data['auteur'] !== null){
+			$auteur = $mapperAuteur->find($data['auteur']);
+		}else{
+			$auteur = $mapperAuteur->getAnonymeEntity('inconnu');
+		}
+		
+		$mapperCategorie = new Core_Model_Mapper_Categorie();
+		$categorie = $mapperCategorie->find($data['categorie']);
+		
+		
+		
+		$categorie->addArticle($article);
+		$auteur->addArticle($article);
+		
+		$article->setCategorie($categorie);
+		$article->setAuteur($auteur);
+		
+		return $article;
+	}
 }

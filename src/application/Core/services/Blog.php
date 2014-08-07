@@ -4,12 +4,48 @@ class Core_Service_Blog
 {
 	
 	
-	public function fetchCategories(){
+	public function fetchCategories($asArray = false){
 		
 		$mapper = new Core_Model_Mapper_Categorie();
-		return $mapper->fetchAll();
+		$result = $mapper->fetchAll();
+		if(false === $asArray){
+			return $result;
+		}else {
+			$resulArray = array();
+			foreach($result as $categorie){
+				$resulArray[$categorie->getId()] = $categorie->getNom();
+			}
+			
+			return $resulArray;
+		}
 	}
 	
+	public function fetchAuteurs($asArray = false){
+	
+		$mapper = new Core_Model_Mapper_Auteur();
+		$result = $mapper->fetchAll();
+		if(false === $asArray){
+			return $result;
+		}else {
+			$resulArray = array();
+			foreach($result as $auteur){
+				$resulArray[$auteur->getId()] = $auteur->getName();
+			}
+				
+			return $resulArray;
+		}
+	}
+	
+	
+	public function finCategories($id){
+	
+		
+		if (0 === (int) $id) {
+			throw new InvalidArgumentException('articleId doit être un entier supérieur à 1');
+		}
+		$mapper = new Core_Model_Mapper_Categorie();
+		return $mapper->find($id);
+	}
 	
 	
 	
@@ -53,5 +89,31 @@ class Core_Service_Blog
 		$mapper = new Core_Model_Mapper_Article;
 		$mapper->save($article); 
 		//qiojgqllqghsjlkhj 
+	}
+	
+	public function fetchArticlesByIdCategorie($id){
+		
+		$count = (int) $count;
+		
+		if (0 === $count) {
+			throw new InvalidArgumentException('count doit être un entier supérieur à 1');
+		}
+		
+		$mapper = new Core_Model_Mapper_Article;
+		$where = array(Core_Model_Mapper_Article::COL_CATEGORIE_ID . ' = ?' => $id);
+		$articles = $mapper->fetchAll($where,'article_id DESC');
+		
+		return $articles;
+		
+		
+	}
+	
+	
+	
+	public function ajouterArticle(){
+		
+		$mapper = new Core_Model_Mapper_Article;
+		
+		
 	}
 }
